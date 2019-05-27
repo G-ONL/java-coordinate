@@ -1,17 +1,20 @@
 package location.domain;
 
-public class Line extends Shape {
+public class Line extends Figure {
     private static final int SQUARE = 2;
-    private final Point point1;
-    private final Point point2;
 
     public Line(final Points points) {
-        this.point1 = points.get(0);
-        this.point2 = points.get(1);
+        super(points);
     }
 
     @Override
-    public Double calculate() {
-        return Math.sqrt(Math.pow((point1.getX() - point2.getX()), SQUARE) + Math.pow((point1.getY() - point2.getY()), SQUARE));
+    public double calculate() {
+        return Math.sqrt(Math.pow((points.get(0).getX() - points.get(1).getX()), SQUARE)
+                + Math.pow((points.get(0).getY() - points.get(1).getY()), SQUARE));
+    }
+
+    @Override
+    public Points getPoints() {
+        return this.points;
     }
 }

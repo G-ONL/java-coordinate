@@ -22,6 +22,11 @@ public class RectangleTest {
     }
 
     @Test
+    void 중복되는_점이_있을때() {
+        assertThrows(IllegalArgumentException.class, () -> new Rectangle( new Points(Arrays.asList(new Point(2, 2), new Point(2, 2), new Point(3, 3), new Point(4, 4)))));
+    }
+
+    @Test
     void 정상적인_직사각형() {
         Points points = new Points(Arrays.asList(new Point(0, 1), new Point(1, 0), new Point(2, 3), new Point(3, 2)));
         Rectangle rectangle = new Rectangle(points);
@@ -34,4 +39,11 @@ public class RectangleTest {
         Rectangle rectangle = new Rectangle(points);
         assertThat(rectangle.calculate()).isEqualTo(4, Assertions.offset(0.009));
     }
+
+    @Test
+    void 한_직선에_모두_있을때() {
+        Points points = new Points(Arrays.asList(new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(4, 4)));
+        assertThrows(IllegalArgumentException.class, () -> new Rectangle(points));
+    }
+
 }

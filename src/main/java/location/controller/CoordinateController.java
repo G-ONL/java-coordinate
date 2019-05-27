@@ -1,15 +1,29 @@
 package location.controller;
 
+import location.domain.Figure;
+import location.domain.FigureMaker;
+import location.domain.PointMaker;
 import location.domain.Points;
-import location.domain.Shape;
-import location.domain.ShapeMaker;
 import location.view.InputView;
+import location.view.OutputView;
 
 public class CoordinateController {
 
     public static void main(String[] args) {
-        Points points = new Points(InputView.inputCoordinate());
-        Shape shape = ShapeMaker.create(points);
-        System.out.println(shape.calculate());
+        Figure figure = inputValidation();
+        OutputView outputView = new OutputView(figure.getPoints().size(), figure.calculate());
+        outputView.printResultMap(figure.getPoints());
+        outputView.printResultText();
     }
+
+    private static Figure inputValidation() {
+        try {
+            Points points = new Points(PointMaker.create(InputView.inputCoordinate()));
+            return FigureMaker.create(points);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputValidation();
+        }
+    }
+
 }

@@ -1,10 +1,8 @@
 package rentcar.domain;
 
-public abstract class Car {
+public abstract class Car implements CarInterface {
+    double getChargeQuantity(){
+        return getTripDistance() / getDistancePerLiter();
+    }
 
-    abstract double getDistancePerLiter();
-
-    abstract double getTripDistance();
-
-    abstract String getName();
 }
